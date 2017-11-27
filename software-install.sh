@@ -3,17 +3,7 @@ set -e
 
 printf "Installing recommended softwares...\n"
 
-# Adding MongoDB keys
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
-# Adding Jenkins keys
-wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
-sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
 
-# Adding JUJU repository
-sudo add-apt-repository ppa:juju/stable
-## Adding fasd repository
-sudo add-apt-repository ppa:aacebedo/fasd
 # Updating apt to refresh repos
 sudo apt-get update
 
@@ -21,24 +11,6 @@ globals=(
 	build-essential
   libssl-dev
   pkg-config
-  lamp-server^
-  default-jre
-  default-jdk
-  jenkins
-  juju-quickstart
-  tree
-  mongodb-org
-  phpmyadmin
-  npm
-  php5-curl
-  lua5.2
-  libssh2-php
-  python-pip
-  rkhunter
-  chkrootkit
-  nmap
-  tiger
-  fasd
 )
 
 # Install apt modules
