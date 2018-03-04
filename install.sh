@@ -35,7 +35,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	fi
 
 	if [[ ! -d ${SOURCE_LOCATION}/dotfiles ]]; then
-		git clone --recursive -b linux "git@github.com:adalisan/dotfiles-1.git"
+		git clone --recursive -b linux "git@github.com:adalisan/dotfiles-1.git" dotfiles
 	fi
     # run the dotfiles installation
     bash "${SOURCE_LOCATION}/dotfiles/install.sh"
