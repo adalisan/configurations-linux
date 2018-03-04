@@ -3,7 +3,9 @@ set -e
 
 printf "Installing recommended softwares...\n"
 
+mkdir  $HOME/bin && cd $HOME/bin && export PATH=$HOME/bin:$PATH \
 curl https://getmic.ro | bash
+chmod +x micro
 
 sudo apt-get update
 
