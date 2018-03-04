@@ -11,6 +11,7 @@ globals=(
 	build-essential
   libssl-dev
   pkg-config
+  python_setuptools
 )
 
 # Install apt modules
