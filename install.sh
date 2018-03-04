@@ -21,7 +21,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	printf "Cloning Required repositories...\n"
 
 	if [[ ! -d ${SOURCE_LOCATION}/bash-it ]]; then
-		git clone -b linux "git@github.com:ahmadassaf/bash-it.git"
+		git clone -b linux "git@github.com:adalisan/bash-it.git"
 		ln -s "$SOURCE_LOCATION/bash-it" "${HOME}/.bash_it"
 
 		mkdir "${HOME}/.bash_it/aliases/enabled"
