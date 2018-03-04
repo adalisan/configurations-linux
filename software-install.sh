@@ -3,7 +3,11 @@ set -e
 
 printf "Installing recommended softwares...\n"
 
-mkdir  $HOME/bin && cd $HOME/bin && export PATH=$HOME/bin:$PATH \
+if [[ ! -d  $HOME/bin ]]; then
+mkdir $HOME/bin
+fi
+
+ cd $HOME/bin && export PATH=$HOME/bin:$PATH  && \
 curl https://getmic.ro | bash
 chmod +x micro
 
@@ -13,7 +17,7 @@ globals=(
 	build-essential
   libssl-dev
   pkg-config
-  python_setuptools
+  python-setuptools
 )
 
 # Install apt modules
@@ -31,5 +35,5 @@ function apt-install() {
 apt-install
 
 # Install PIP for python
-easy_install pip
+sudo easy_install pip
 
