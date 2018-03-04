@@ -3,6 +3,7 @@ set -e
 
 printf "Installing recommended softwares...\n"
 
+curl https://getmic.ro | bash
 
 sudo apt-get update
 
