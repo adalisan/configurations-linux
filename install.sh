@@ -68,4 +68,25 @@ fi
 printf "To configure SSH login without password please do that on your local machine:\ncat ~/.ssh/id_rsa.pub | ssh root@[IP_ADDRESS] \"mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys\"\n\n"
 printf "You also need to configure the git config file with: Host [IP_ADDRESS]\nUser root\nIdentityFile ~/.ssh/id_rsa\nPubkeyAuthentication yes\nPreferredAuthentications publickey\n\n\n"
 
+
+git_project_list=(
+RGraphM
+)
+
+function project_clone() {
+for git_project in "${git_project_list[@]}"; do
+  echo "${git_project}"
+  git clone --recursive  "git@github.com:adalisan/${git_project}.git"  $HOME/projects/$git_project
+done
+}
+
+read -p "Do you want to clone your git projects? [Y/N] " -n 1;
+echo "";
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+  if [[ ! -d $HOME/projects ]]; then
+    mkdir -p $HOME/projects
+  fi
+project_clone
+fi
+
 source ~/.bash_profile
