@@ -35,7 +35,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	fi
 
 	if [[ ! -d ${SOURCE_LOCATION}/dotfiles ]]; then
-		git clone --recursive -b linux "git@github.com:adalisan/dotfiles-1.git" dotfiles
+		git clone --recursive -b linux "git@github.com:adalisan/dotfiles.git" dotfiles
 	fi
     # run the dotfiles installation
     bash "${SOURCE_LOCATION}/dotfiles/install.sh"
@@ -73,20 +73,34 @@ git_project_list=(
 RGraphM
 )
 
+git_code_list=(
+powerline/fonts
+)
 function project_clone() {
 for git_project in "${git_project_list[@]}"; do
   echo "${git_project}"
   git clone --recursive  "git@github.com:adalisan/${git_project}.git"  $HOME/projects/$git_project
 done
 }
-
+function github_clone() {
+for git_project in "${git_project_list[@]}"; do
+  echo "${git_project}"
+  git clone --recursive  "git@github.com:${git_project}.git"  $HOME/projects/src/$git_project
+done
+}
 read -p "Do you want to clone your git projects? [Y/N] " -n 1;
 echo "";
 if [[ $REPLY =~ ^[Yy]$ ]]; then
   if [[ ! -d $HOME/projects ]]; then
     mkdir -p $HOME/projects
   fi
+  if [[ ! -d $HOME/projects/src ]]; then
+    mkdir -p $HOME/projects/src
+  fi
 project_clone
+github_clone
 fi
+wget https://github.com/google/fonts/archive/master.zip -O ~/.fonts/gfonts.zip
+unzip ~/.fonts/gfonts.zip
 
 source ~/.bash_profile
