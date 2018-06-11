@@ -8,7 +8,7 @@ printf "Configuring Bash-it installation...\n"
 export BASH_IT="$HOME/.bash_it"
 
 
-bash-it enable plugin alias-completion tmux ssh projects  history extract explain dirs compress xterm
+bash-it enable plugin base alias-completion tmux ssh projects  history extract explain dirs compress xterm
 
 bash-it enable alias apt curl docker general git homebrew tmux
 bash-it enable completion bash-it	brew conda	defaults dirs docker	docker-compose	docker-machine git hub pip	projects	ssh system	tmux
