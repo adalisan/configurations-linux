@@ -11,7 +11,7 @@ fi
 curl https://getmic.ro | bash
 chmod +x micro
 
-sudo apt-get update
+#sudo apt-get update
 
 globals=(
 	build-essential
@@ -35,7 +35,7 @@ function apt-install() {
 }
 
 # Call the apt-install functions on the softwares list
-apt-install
+#apt-install
 
 # Install PIP for python
 #sudo easy_install pip
