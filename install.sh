@@ -116,7 +116,19 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 project_clone
 github_clone
 fi
+
+mkdir -p ~/.fonts
 wget https://github.com/google/fonts/archive/master.zip -O ~/.fonts/gfonts.zip
 unzip ~/.fonts/gfonts.zip
 
-source ~/.bash_profile
+
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+echo 'PATH=~/bin:$PATH' >> ~/.bashrc
+sudo apt-get update
+sudo apt-get install code
+
+if [[ -e ~/.bash_profile ]]; then
+  source ~/.bash_profile
+fi
