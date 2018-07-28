@@ -18,6 +18,9 @@ globals=(
   libssl-dev
   pkg-config
   python-setuptools
+  python-pip
+  htop
+  neofetch
 )
 
 # Install apt modules
@@ -35,5 +38,5 @@ function apt-install() {
 apt-install
 
 # Install PIP for python
-sudo easy_install pip
+#sudo easy_install pip
 

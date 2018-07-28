@@ -71,11 +71,27 @@ printf "You also need to configure the git config file with: Host [IP_ADDRESS]\n
 
 git_project_list=(
 RGraphM
+adalisan.github.io
+pages-hugo
+maxio
+mendeley-python-sdk
+machine-learning-cheat-sheet
+hugo-academic
+stat-cookbook
+Network-Embedding-Resources
+JOFC-GraphMatch
+LCDM_Analysis
+JOFC-MatchDetect
+sci-lit-refs
+pocket-archive-stream
+mendeley-api-python-example
 )
 
 git_code_list=(
 powerline/fonts
+patrick330602/wslu
 )
+
 function project_clone() {
 for git_project in "${git_project_list[@]}"; do
   echo "${git_project}"
@@ -83,7 +99,7 @@ for git_project in "${git_project_list[@]}"; do
 done
 }
 function github_clone() {
-for git_project in "${git_project_list[@]}"; do
+for git_project in "${git_code_list[@]}"; do
   echo "${git_project}"
   git clone --recursive  "git@github.com:${git_project}.git"  $HOME/projects/src/$git_project
 done
