@@ -8,10 +8,17 @@ mkdir $HOME/bin
 fi
 
  cd $HOME/bin && export PATH=$HOME/bin:$PATH  && \
+ if [[ ! -f $HOME/bin/micro ]]; then
+ echo " Downloading latest version of  micro  " && \
 curl https://getmic.ro | bash
+fi
+if [[  -f $HOME/bin/micro ]]; then
 chmod +x micro
+fi
 
-#sudo apt-get update
+if [[! defined $NOTSUDOER ]]; then
+sudo apt-get update
+fi
 
 globals=(
 	build-essential
@@ -35,8 +42,6 @@ function apt-install() {
 }
 
 # Call the apt-install functions on the softwares list
-#apt-install
-
-# Install PIP for python
-#sudo easy_install pip
-
+if [[! defined $NOTSUDOER ]]; then
+apt-install
+fi

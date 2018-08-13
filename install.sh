@@ -50,7 +50,10 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     if [[ ! -d ${SOURCE_LOCATION}/grc ]]; then
 	   git clone "https://github.com/garabik/grc"
     fi
-	cd "${SOURCE_LOCATION}/grc" && sudo bash "install.sh"
+	cd "${SOURCE_LOCATION}/grc" &&  \
+	if [[ ! defined $NOTSUDOER ]]; then
+	sudo bash "install.sh"
+	fi
 fi;
 
 read -p "Would you like to install the software packaged? [Y/N] " -n 1;
@@ -90,6 +93,7 @@ mendeley-api-python-example
 git_code_list=(
 powerline/fonts
 patrick330602/wslu
+natelandau/shell-scripts
 )
 
 function project_clone() {
@@ -117,17 +121,24 @@ project_clone
 github_clone
 fi
 
+if [[ -f  $HOME/projects/src/shell-scripts/simpleScriptTemplate.sh ]]; then
+echo "Linking ~/bin/shell-scripts to  shell scripts repo"
+ln -s $HOME/bin/shell-scripts $HOME/projects/src/shell-scripts
+fi
+
 mkdir -p ~/.fonts
 wget https://github.com/google/fonts/archive/master.zip -O ~/.fonts/gfonts.zip
 unzip ~/.fonts/gfonts.zip
 
-
+if [[ ! defined $NOTSUDOER ]]; then
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
 sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-echo 'PATH=~/bin:$PATH' >> ~/.bashrc
 sudo apt-get update
 sudo apt-get install code
+fi
+
+echo 'PATH=~/bin:$PATH' >> ~/.bashrc
 
 if [[ -e ~/.bash_profile ]]; then
   source ~/.bash_profile
