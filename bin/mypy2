@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+# a python wrapper to make it easy to launch various python binary/virtualenv
+
+set -e
+set -o pipefail
+set -u
+#set -x
+
+script_dir=$(dirname $(readlink -f $0))
+
+python=/usr/bin/python
+python_path=
+glibc=
+print=0
+
+while test $# -gt 0; do
+    case "$1" in
+        -h|--help)
+            echo "args: -l <python_path> -g <glibc_path> -b <python_exectuable> [arguments]"
+            echo " "
+            echo "options:"
+            echo "    -h, --help,   show brief help."
+            echo "    -b, --binary, specify the python binary or venv name such as 'myvenv'."
+            echo "                  default: '$python'"
+            echo "    -l, --lib,    specify additional paths to be used as PYTHONPATH. Note user's existing PYTHONPATH can cause conflict and is not used."
+            echo "    -g, --glibc,  specify the glibc path."
+            echo "                  default: '$glibc'"
+            echo "    -p, --print,  print the complete command."
+            exit 0
+            ;;
+        -l|--lib)
+            shift
+            if test $# -gt 0; then
+                export python_path="$1"
+            else
+                echo "python_path not specified"
+                exit 1
+            fi
+            shift
+            ;;
+        -g|--glibc)
+            shift
+            if test $# -gt 0; then
+                glibc="$1"
+                if [ ! -e "$glibc" ]; then
+                    echo "'$glibc' does not exist"
+                    exit 1
+                fi
+            else
+                echo "glibc_path not specified"
+                exit 1
+            fi
+            shift
+            ;;
+        -b|--binary)
+            shift
+            if test $# -gt 0; then
+                python="$1"
+                if [ ! -f "$python" -a -x "$script_dir/venv/$python/bin/python" ]; then
+                    python="$script_dir/venv/$python/bin/python"
+                fi
+            else
+                echo "python_exectuable not specified"
+                exit 1
+            fi
+            shift
+            ;;
+        -p|--print)
+            shift
+            print=1
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+if test $print -eq 1; then
+    echo "*"
+    echo "* complete command:"
+    echo "*  export PYTHONPATH=$python_path"
+    echo "*  $glibc $python $@"
+    echo "*"
+fi
+
+export PYTHONPATH="$python_path"
+#export LD_LIBRARY_PATH=/nfs/mercury-11/u105/zjiang/local/cuda-6.0/lib64/:/nfs/mercury-11/u105/zjiang/local/cuda-6.0/extras/CUPTI/lib64:/nfs/mercury-11/u105/zjiang/local/lib64:/home/swu/local/lib64:/d4m/vid/users/zjiang/local/liblmdb:/nfs/mercury-11/u123/opencv-2.4.9/release/lib:/d4m/vid/users/zjiang/local/OpenBLAS/lib:$LD_LIBRARY_PATH
+$python "$@"
