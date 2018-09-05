@@ -7,3 +7,6 @@
 [submodule "grc"]
 	path = grc
 	url = git@github.com:garabik/grc.git
+[submodule "vsi_common"]
+	path = vsi_common
+	url = https://github.com/adalisan/vsi_common.git
