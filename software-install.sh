@@ -28,6 +28,8 @@ globals=(
   python-pip
   htop
   neofetch
+  python-pipenv
+  cookiecutter
 )
 
 # Install apt modules

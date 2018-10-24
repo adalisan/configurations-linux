@@ -88,6 +88,7 @@ JOFC-MatchDetect
 sci-lit-refs
 pocket-archive-stream
 mendeley-api-python-example
+cookie-cutter-python-scientific
 )
 
 git_code_list=(
