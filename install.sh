@@ -50,8 +50,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     if [[ ! -d ${SOURCE_LOCATION}/grc ]]; then
 	   git clone "https://github.com/garabik/grc"
     fi
+	if [[ ! -z ${NOTSUDOER} ]]; then
 	cd "${SOURCE_LOCATION}/grc" &&  \
-	if [[ ! defined $NOTSUDOER ]]; then
 	sudo bash "install.sh"
 	fi
 fi;
