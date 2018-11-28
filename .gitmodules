@@ -13,3 +13,6 @@
 [submodule "shell-scripts"]
 	path = shell-scripts
 	url = git@github.com:adalisan/shell-scripts.git
+[submodule "dotfiles_extra"]
+	path = dotfiles_extra
+	url = git@github.com:adalisan/dotfiles_extra
