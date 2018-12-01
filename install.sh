@@ -139,8 +139,24 @@ sudo apt-get update
 sudo apt-get install code
 fi
 
+
+
+
 echo 'PATH=~/bin:$PATH' >> ~/.bashrc
 
 if [[ -e ~/.bash_profile ]]; then
   source ~/.bash_profile
 fi
+
+
+
+printf "\nSwitch default shell to zsh?\n"
+read -p "This will enable zsh. Are you sure? [Y/N]" -n 1;
+printf "";
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    if [[ -f "${HOME}/.zshrc" ]]; then
+      echo " --> zshrc rc found, backing up ..";
+      mv "${HOME}/.zshrc" "${HOME}/.zshrc.bak" 
+    fi
+    . "$SOURCE_LOCATION/dotfiles_extra/deploy.sh" 
+fi;
