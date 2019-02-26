@@ -16,7 +16,7 @@ if [[  -f $HOME/bin/micro ]]; then
 chmod +x micro
 fi
 
-if [[! defined $NOTSUDOER ]]; then
+if [[ ! defined $NOTSUDOER ]]; then
 sudo apt-get update
 fi
 
