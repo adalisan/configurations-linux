@@ -45,7 +45,7 @@ function apt-install() {
 }
 
 # Call the apt-install functions on the softwares list
-if [[! defined $NOTSUDOER ]]; then
+if [[ ! defined $NOTSUDOER ]]; then
 apt-install
 fi
 
