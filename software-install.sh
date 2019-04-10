@@ -16,7 +16,7 @@ if [[  -f $HOME/bin/micro ]]; then
 chmod +x micro
 fi
 
-if [[ ! defined $NOTSUDOER ]]; then
+if [[  -z  "${NOTSUDOER}"  ]]; then
 sudo apt-get update
 fi
 
@@ -45,7 +45,7 @@ function apt-install() {
 }
 
 # Call the apt-install functions on the softwares list
-if [[ ! defined $NOTSUDOER ]]; then
+if [[ -z "${NOTSUDOER}" ]]; then
 apt-install
 fi
 
@@ -56,7 +56,7 @@ wget https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party
 chmod a+x  $HOME/bin/diff-so-fancy
 fi
 
-read -p "Would you like to install mmake as  more helpful make alternative? [Y/N] " -n 1;
+read -p "Would you like to install mmake as  more helpful make alternative? [Y/N] . Need go " -n 1;
 echo "";
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 go get github.com/tj/mmake/cmd/mmake

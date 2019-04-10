@@ -93,7 +93,7 @@ cookie-cutter-python-scientific
 
 git_code_list=(
 powerline/fonts
-patrick330602/wslu
+wslutilities/wslu
 natelandau/shell-scripts
 )
 
@@ -119,6 +119,16 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     mkdir -p $HOME/projects/src
   fi
 project_clone
+fi
+read -p "Do you want to clone other devs  git projects? [Y/N] " -n 1;
+echo "";
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+  if [[ ! -d $HOME/projects ]]; then
+    mkdir -p $HOME/projects
+  fi
+  if [[ ! -d $HOME/projects/src ]]; then
+    mkdir -p $HOME/projects/src
+  fi
 github_clone
 fi
 
@@ -128,10 +138,14 @@ ln -s $HOME/bin/shell-scripts $HOME/projects/src/shell-scripts
 fi
 
 mkdir -p ~/.fonts
+read -p "Do you want to download Google fonts? [Y/N] " -n 1;
+echo "";
+if [[ $REPLY =~ ^[Yy]$ ]]; then
 wget https://github.com/google/fonts/archive/master.zip -O ~/.fonts/gfonts.zip
 unzip ~/.fonts/gfonts.zip
+fi
 
-if [[ ! defined $NOTSUDOER ]]; then
+if [[ -z  "$NOTSUDOER" ]]; then
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
 sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
